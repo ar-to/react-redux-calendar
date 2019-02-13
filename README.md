@@ -1,4 +1,38 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React-Redux Calendar
+
+## Releases
+
+### v0.1.0
+DONE:
+- uses react and redux
+- max char 30 for reminders
+- color picker feature
+- calendar 
+  - can move to other months
+  - weekdays, weeks, days displaying correctly.
+  - added empty days to show start of month correctly
+  - bug: moving back to dec and forward again to jan jumps the year from 2019 to 2020 then back to 2019 again when moved to feb.
+- reminder feature. This is most likely caused by the way I'm handling the changing of the month data via momentjs.
+  - displayed per day
+  - multiple reminders per day are attacked under each other
+  - only show for the selected month
+  - CRUD operations working
+- JSON
+  - kept the json output on the left side of the app to help show the redux data being used. I like looking at data to check my work so I kept it in.
+
+TODO:
+- change date within the reminder 
+  - reason: I think this takes more time than what I plan to spend on this project right now. 
+    Mainly because I see it as a dropdown, drag and drop or calendar widget of some sorts and 
+    I need to plan it out more to work correctly with my current state management.
+- refactoring:
+  - reminders feature to make it more elegant
+  - to handle component state and redux state with less code and possibly improve performance
+  and find potential antipatterns within react or redux.
+- testing would be nice
+- UI updates
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). 
 
 ## Available Scripts
 

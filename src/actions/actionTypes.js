@@ -1,0 +1,11 @@
+
+export const TEST = 'TEST';
+
+export const CURRENTMONTH = 'CURRENTMONTH';
+export const PREVMONTH = 'PREVMONTH';
+export const NEXTMONTH = 'NEXTMONTH';
+
+export const ADDREMINDER = 'ADDREMINDER';
+export const GETREMINDERS = 'GETREMINDERS';
+export const EDITREMINDER = 'EDITREMINDER';
+export const DELETEREMINDER = 'DELETEREMINDER';
