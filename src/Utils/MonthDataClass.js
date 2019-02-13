@@ -1,5 +1,5 @@
 
-export default class thisClass {
+export default class MonthDataClass {
   constructor(moment) {
     this.index = moment.month();
     this.shortName = moment.format('MMM');

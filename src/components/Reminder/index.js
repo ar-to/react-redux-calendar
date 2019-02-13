@@ -1,5 +1,4 @@
 import React from 'react'
-// import ReminderClass from '../Utils/ReminderClass';
 import ReminderClass from '../../Utils/ReminderClass';
 import uuidv1 from 'uuid/v1';
 import { BlockPicker } from 'react-color';
@@ -117,10 +116,6 @@ export default class Welcome extends React.Component {
       reminderPlaceholder: ''
     });
   }
-
-  // ReminderCellStyles = {
-  //   color: this.state.reminderColor
-  // }
 
   handleChangeComplete = (color) => {
     this.setState({ reminderColor: color.hex });
