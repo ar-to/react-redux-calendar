@@ -2,7 +2,9 @@
   "name": "react-calendar",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://ar-to.github.io/react-redux-calendar",
   "dependencies": {
+    "gh-pages": "^2.0.1",
     "moment": "^2.24.0",
     "react": "^16.8.1",
     "react-color": "^2.17.0",
@@ -14,6 +16,8 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
