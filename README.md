@@ -2,8 +2,17 @@
 
 ## Releases
 
+### v0.1.1
+#### DONE
+- CSV export: 
+  - a download button
+  - warning for users that they have not downloaded the .csv file since the last change.
+- Highlight Today's date/day so its easy to find
+- Bugs Fixed: 
+  - color selection is not per reminder within the same day but the color changes all reminders
+
 ### v0.1.0
-DONE:
+#### DONE:
 - uses react and redux
 - max char 30 for reminders
 - color picker feature
@@ -20,7 +29,11 @@ DONE:
 - JSON
   - kept the json output on the left side of the app to help show the redux data being used. I like looking at data to check my work so I kept it in.
 
-TODO:
+## TODO:
+- BUGS:
+  - bug: moving back to dec and forward again to jan jumps the year from 2019 to 2020 then back to 2019 again when moved to feb. Seem like the last year actual fowards to the current year and makes it confusing. 
+- calendar:
+  - UI updates 
 - change date within the reminder 
   - reason: I think this takes more time than what I plan to spend on this project right now. 
     Mainly because I see it as a dropdown, drag and drop or calendar widget of some sorts and 
@@ -29,8 +42,14 @@ TODO:
   - reminders feature to make it more elegant
   - to handle component state and redux state with less code and possibly improve performance
   and find potential antipatterns within react or redux.
+- Redux State
+  - add reminders within the month_data instead of separate. This may require a refactor.
 - testing would be nice
-- UI updates
+- CSV export
+  - reminders redux state should have formatted time, color chosen per reminder
+- CSV import
+  - allow importing of reminders from a spreadsheet
+- consider saving reminders to localstorage so on page reload data is not lost during a session. This avoid the need of a database and keeps data local to users/vistors
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). 
 

@@ -11,7 +11,8 @@ function createReminder(payload) {
     uuid: payload.id,
     date: payload.date,
     text: payload.text,
-    dayIndex: payload.arrayIndex
+    dayIndex: payload.arrayIndex,
+    reminderColor: payload.reminderColor
   }
 }
 
@@ -51,6 +52,7 @@ export function reminders(state = INITIAL_STATE, action) {
       let stateRemindersCopy = [...state.reminder];
       stateRemindersCopy[fetchedReminder.index].text = action.payload.text
       stateRemindersCopy[fetchedReminder.index].date = action.payload.date
+      stateRemindersCopy[fetchedReminder.index].reminderColor = action.payload.reminderColor
       return { ...state }
     case actionTypes.DELETEREMINDER:
       return { ...state, text: action.payload }

@@ -15,7 +15,10 @@ const INITIAL_STATE = {
  * @return {Object}
  */
 function getMonth(when, index) {
-  const active = Moment().month(index);
+  let active;
+  if (index >= 0) {
+    active = Moment().month(index);
+  }
 
   switch (when) {
     case 'PREVMONTH':

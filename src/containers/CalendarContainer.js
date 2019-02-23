@@ -5,6 +5,8 @@ import Calendar from '../components/Calendar';
 
 const mapStateToProps = state => {
   return {
+    months: state.months,
+    reminders: state.reminders,
     currentMonthIndex: state.months.current_month,
     monthData: state.months.month_data,
     weekDays: state.months.week_days, 

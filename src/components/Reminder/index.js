@@ -19,7 +19,7 @@ const ColorPickStyles = {
 }
 
 export default class Welcome extends React.Component {
-  constructor(props) {   
+  constructor(props) {
     super(props);
     this.state = {
       openedInput: false,
@@ -33,6 +33,17 @@ export default class Welcome extends React.Component {
       displayColorPicker: false
     };
   }
+
+  // componentDidUpdate = (prevProps, prevState) => {
+    /**
+     * Update warning that backup (download) has not been done
+     */
+    // if (this.props.reminders.reminder.length !== prevProps.reminders.reminder.length) {
+    //   this.setState({
+    //     downloadWarning: true
+    //   })
+    // }
+  // }
 
   openInput = (e) => {
     e.preventDefault();
@@ -67,7 +78,7 @@ export default class Welcome extends React.Component {
     let id = uuidv1();
     return this.setState({
       reminderPlaceholder: e.target.value,
-      reminderObject: new ReminderClass(id, this.props.monthData.shortName, e.target.value, this.props.day.dayIndex),
+      reminderObject: new ReminderClass(id, this.props.monthData.shortName, e.target.value, this.props.day.dayIndex, this.state.reminderColor),
     })
   }
 
@@ -76,6 +87,7 @@ export default class Welcome extends React.Component {
       if (reminder.id === this.state.reminderToEdit.id) {
         let remindersCopy = [...this.state.dayReminders];
         remindersCopy[index].text = e.target.value;
+        remindersCopy[index].reminderColor = this.state.reminderColor;
 
         return this.setState({
           reminderObject: remindersCopy,
@@ -86,10 +98,23 @@ export default class Welcome extends React.Component {
   }
 
   updateReminder = (e) => {
-    this.props.editReminder(this.state.reminderToEdit)
-    return this.setState({
-      openedEditInput: false,
-    });
+    let payload = this.state.reminderToEdit;
+    let payloadCopy = Object.assign({}, payload, { reminderColor: this.state.reminderColor })
+    this.props.editReminder(payloadCopy)
+
+    this.state.dayReminders.find((reminder, index) => {
+      if (reminder.id === this.state.reminderToEdit.id) {
+        let remindersCopy = [...this.state.dayReminders];
+        remindersCopy[index].text = this.state.reminderToEdit.text;
+        remindersCopy[index].reminderColor = this.state.reminderColor;
+
+        return this.setState({
+          // reminderObject: remindersCopy,
+          openedEditInput: false,
+        })
+      }
+      return null;
+    })
   }
 
   removeReminder = (e, reminderToRemove) => {
@@ -108,17 +133,21 @@ export default class Welcome extends React.Component {
 
   saveReminder = (e) => {
     let payload = this.state.reminderObject;
-    this.props.addReminder(payload)
+    let payloadCopy = Object.assign({}, payload, { reminderColor: this.state.reminderColor })
+    this.props.addReminder(payloadCopy)
 
     return this.setState({
       openedInput: false,
-      dayReminders: [...this.state.dayReminders, payload],
-      reminderPlaceholder: ''
+      dayReminders: [...this.state.dayReminders, payloadCopy],
+      reminderPlaceholder: '',
+      reminderColor: ''
     });
   }
 
   handleChangeComplete = (color) => {
-    this.setState({ reminderColor: color.hex });
+    this.setState({
+      reminderColor: color.hex
+    });
   };
 
   handleClick = () => {
@@ -133,6 +162,10 @@ export default class Welcome extends React.Component {
     if (this.state.openedInput) {
       return (
         <div>
+          {this.state.reminderPlaceholder ?
+            <p className="reminder--overflow" style={{
+              color: this.state.reminderColor
+            }}>{this.state.reminderPlaceholder}</p> : null}
           <div className="form-group">
             <label htmlFor="exampleFormControlTextarea1">Enter Text Below</label>
             <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" maxLength={30} onChange={this.addReminder} placeholder={this.state.reminderPlaceholder}></textarea>
@@ -176,16 +209,12 @@ export default class Welcome extends React.Component {
   render() {
     return (
       <div>
-        {this.state.reminderPlaceholder ?
-          <p className="reminder--overflow" style={{
-            color: this.state.reminderColor
-          }}>{this.state.reminderPlaceholder}</p> : null}
         {this.state.dayReminders.map((reminder, index) => {
           if (reminder.arrayIndex === this.props.day.dayIndex) {
             return (
               <div key={index}>
                 <p className="reminder--overflow" style={{
-                  color: this.state.reminderColor
+                  color: reminder.reminderColor
                 }}>{reminder.text}</p>
                 <a href='/' onClick={(e) => this.openEditInput(e, reminder)}>edit</a>/
                 <a href='/' onClick={(e) => this.removeReminder(e, reminder)}>remove</a>
